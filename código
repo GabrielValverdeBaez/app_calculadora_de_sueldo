@@ -1,0 +1,53 @@
+def calcular_sueldo(hora_inicio, hora_fin):
+    # Diccionario con los valores de remuneración por hora
+    remuneraciones = {
+        '06': 12.13,
+        '07': 12.13,
+        '08': 12.13,
+        '09': 12.13,
+        '10': 12.13,
+        '11': 12.13,
+        '12': 12.13,
+        '13': 12.13,
+        '14': 12.13,
+        '15': 12.13,
+        '16': 12.13,
+        '17': 12.13,
+        '18': 12.13,
+        '19': 12.13,
+        '20': 12.13,
+        '21': 12.13,
+        '22': 15.16,
+        '23': 15.16,
+        '00': 18.19,
+        '01': 18.19,
+        '02': 18.19,
+        '03': 18.19,
+        '04': 18.19,
+        '05': 18.19,
+    }
+
+    # Convertir las horas de inicio y fin a formato HH (sin minutos)
+    hora_inicio = int(hora_inicio.split(':')[0])
+    hora_fin = int(hora_fin.split(':')[0])
+
+    # Inicializar el sueldo total en 0
+    sueldo_total = 0
+
+    # Calcular el sueldo por cada hora de la jornada
+    hora_actual = hora_inicio
+    while hora_actual % 24 != hora_fin:
+        sueldo_actual = remuneraciones[str(hora_actual % 24).zfill(2)]
+        sueldo_total += sueldo_actual
+
+        # Incrementar la hora actual
+        hora_actual = (hora_actual + 1) % 24
+
+    return round(sueldo_total, 2)
+
+# Ejemplo de uso
+hora_inicio = "18:00"
+hora_fin = "01:00"
+sueldo_jornada = calcular_sueldo(hora_inicio, hora_fin)
+print(f"El sueldo total por la jornada es: ${sueldo_jornada}")
+
